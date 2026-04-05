@@ -59,7 +59,6 @@ Product Performance: Xác định top sản phẩm bán chạy nhất theo từn
 Window Functions: Sử dụng RANK() và LAG() để tính toán mức tăng trưởng doanh thu so với tháng trước.
 
 📁 Cấu trúc thư mục
-Plaintext
 sql-data-warehouse-project/
 ├── datasets/           # Dữ liệu thô (CSV)
 ├── scripts/            # Script SQL thực thi
