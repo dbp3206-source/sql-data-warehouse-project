@@ -1,5 +1,7 @@
 # sql-data-warehouse-project
 📊 Modern Data Warehouse Project with SQL Server
+
+
 📝 Giới thiệu
 Dự án này tập trung vào việc xây dựng một hệ thống Data Warehouse hiện đại sử dụng SQL Server. Quy trình đi từ việc xử lý dữ liệu thô (Raw Data), xây dựng luồng ETL (Extract - Transform - Load), mô hình hóa dữ liệu (Data Modeling) theo chuẩn Star Schema và thực hiện các phân tích chuyên sâu (Advanced Analytics).
 
