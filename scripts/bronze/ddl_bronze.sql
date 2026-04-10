@@ -1,15 +1,15 @@
 /*
 ===============================================================================
-DDL Script: Create Bronze Tables
+DDL Script: Tạo các bảng tầng Bronze (Bronze Tables)
 ===============================================================================
-Script Purpose:
-    This script creates tables in the 'bronze' schema, dropping existing tables 
-    if they already exist. Run this script to re-define the DDL structure 
-    of 'bronze' Tables.
-	
-Usage:
-    - Execute this script to reset the Bronze layer schema.
-    - Ensure the 'bronze' schema exists before running this script.
+Mục đích của Script:
+    Script này dùng để tạo các bảng trong schema 'bronze', đồng thời xóa bỏ các 
+    bảng hiện có nếu chúng đã tồn tại. Chạy script này để định nghĩa lại 
+    cấu trúc DDL của các bảng tầng 'bronze'.
+
+Cách sử dụng:
+    - Thực thi script này để thiết lập lại (reset) cấu trúc của tầng Bronze.
+    - Đảm bảo rằng schema 'bronze' đã được tạo trước khi chạy script này.
 ===============================================================================
 */
 
