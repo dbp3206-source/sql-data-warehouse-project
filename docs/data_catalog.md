@@ -1,61 +1,62 @@
-# Data Catalog for Gold Layer
+# Từ điển Dữ liệu (Data Catalog) cho Tầng Gold
 
-## Overview
-The Gold Layer is the business-level data representation, structured to support analytical and reporting use cases. It consists of **dimension tables** and **fact tables** for specific business metrics.
+## Tổng quan
 
----
-
-### 1. **gold.dim_customers**
-- **Purpose:** Stores customer details enriched with demographic and geographic data.
-- **Columns:**
-
-| Column Name      | Data Type     | Description                                                                                   |
-|------------------|---------------|-----------------------------------------------------------------------------------------------|
-| customer_key     | INT           | Surrogate key uniquely identifying each customer record in the dimension table.               |
-| customer_id      | INT           | Unique numerical identifier assigned to each customer.                                        |
-| customer_number  | NVARCHAR(50)  | Alphanumeric identifier representing the customer, used for tracking and referencing.         |
-| first_name       | NVARCHAR(50)  | The customer's first name, as recorded in the system.                                         |
-| last_name        | NVARCHAR(50)  | The customer's last name or family name.                                                     |
-| country          | NVARCHAR(50)  | The country of residence for the customer (e.g., 'Australia').                               |
-| marital_status   | NVARCHAR(50)  | The marital status of the customer (e.g., 'Married', 'Single').                              |
-| gender           | NVARCHAR(50)  | The gender of the customer (e.g., 'Male', 'Female', 'n/a').                                  |
-| birthdate        | DATE          | The date of birth of the customer, formatted as YYYY-MM-DD (e.g., 1971-10-06).               |
-| create_date      | DATE          | The date and time when the customer record was created in the system|
+Tầng Gold là lớp biểu diễn dữ liệu ở cấp độ nghiệp vụ, được cấu trúc nhằm hỗ trợ các mục đích phân tích và báo cáo. Nó bao gồm các **bảng danh mục (dimension tables)** và các **bảng sự kiện (fact tables)** phục vụ cho các chỉ số kinh doanh cụ thể.
 
 ---
 
-### 2. **gold.dim_products**
-- **Purpose:** Provides information about the products and their attributes.
-- **Columns:**
+### 1. gold.dim_customers
+* **Mục đích:** Lưu trữ thông tin chi tiết của khách hàng, được làm giàu thêm bằng các dữ liệu nhân khẩu học và địa lý.
+* **Chi tiết các cột:**
 
-| Column Name         | Data Type     | Description                                                                                   |
-|---------------------|---------------|-----------------------------------------------------------------------------------------------|
-| product_key         | INT           | Surrogate key uniquely identifying each product record in the product dimension table.         |
-| product_id          | INT           | A unique identifier assigned to the product for internal tracking and referencing.            |
-| product_number      | NVARCHAR(50)  | A structured alphanumeric code representing the product, often used for categorization or inventory. |
-| product_name        | NVARCHAR(50)  | Descriptive name of the product, including key details such as type, color, and size.         |
-| category_id         | NVARCHAR(50)  | A unique identifier for the product's category, linking to its high-level classification.     |
-| category            | NVARCHAR(50)  | The broader classification of the product (e.g., Bikes, Components) to group related items.  |
-| subcategory         | NVARCHAR(50)  | A more detailed classification of the product within the category, such as product type.      |
-| maintenance_required| NVARCHAR(50)  | Indicates whether the product requires maintenance (e.g., 'Yes', 'No').                       |
-| cost                | INT           | The cost or base price of the product, measured in monetary units.                            |
-| product_line        | NVARCHAR(50)  | The specific product line or series to which the product belongs (e.g., Road, Mountain).      |
-| start_date          | DATE          | The date when the product became available for sale or use, stored in|
+| Tên Cột | Kiểu Dữ Liệu | Mô tả |
+| :--- | :--- | :--- |
+| `customer_key` | INT | Khóa thay thế (Surrogate key) định danh duy nhất cho mỗi bản ghi khách hàng trong bảng dimension. |
+| `customer_id` | INT | Mã định danh dạng số duy nhất được gán cho mỗi khách hàng. |
+| `customer_number` | NVARCHAR(50) | Mã định danh dạng chữ và số đại diện cho khách hàng, dùng để theo dõi và đối chiếu. |
+| `first_name` | NVARCHAR(50) | Tên (First name) của khách hàng, được ghi nhận trong hệ thống. |
+| `last_name` | NVARCHAR(50) | Họ (Last name) của khách hàng. |
+| `country` | NVARCHAR(50) | Quốc gia cư trú của khách hàng (ví dụ: 'Australia'). |
+| `marital_status` | NVARCHAR(50) | Tình trạng hôn nhân của khách hàng (ví dụ: 'Married', 'Single'). |
+| `gender` | NVARCHAR(50) | Giới tính của khách hàng (ví dụ: 'Male', 'Female', 'n/a'). |
+| `birthdate` | DATE | Ngày sinh của khách hàng, định dạng YYYY-MM-DD (ví dụ: 1971-10-06). |
+| `create_date` | DATE | Ngày và giờ bản ghi khách hàng được tạo trong hệ thống. |
 
 ---
 
-### 3. **gold.fact_sales**
-- **Purpose:** Stores transactional sales data for analytical purposes.
-- **Columns:**
+### 2. gold.dim_products
+* **Mục đích:** Cung cấp thông tin về các sản phẩm và các thuộc tính của chúng.
+* **Chi tiết các cột:**
 
-| Column Name     | Data Type     | Description                                                                                   |
-|-----------------|---------------|-----------------------------------------------------------------------------------------------|
-| order_number    | NVARCHAR(50)  | A unique alphanumeric identifier for each sales order (e.g., 'SO54496').                      |
-| product_key     | INT           | Surrogate key linking the order to the product dimension table.                               |
-| customer_key    | INT           | Surrogate key linking the order to the customer dimension table.                              |
-| order_date      | DATE          | The date when the order was placed.                                                           |
-| shipping_date   | DATE          | The date when the order was shipped to the customer.                                          |
-| due_date        | DATE          | The date when the order payment was due.                                                      |
-| sales_amount    | INT           | The total monetary value of the sale for the line item, in whole currency units (e.g., 25).   |
-| quantity        | INT           | The number of units of the product ordered for the line item (e.g., 1).                       |
-| price           | INT           | The price per unit of the product for the line item, in whole currency units (e.g., 25).      |
+| Tên Cột | Kiểu Dữ Liệu | Mô tả |
+| :--- | :--- | :--- |
+| `product_key` | INT | Khóa thay thế (Surrogate key) định danh duy nhất cho mỗi bản ghi sản phẩm trong bảng dimension. |
+| `product_id` | INT | Mã định danh duy nhất được gán cho sản phẩm để theo dõi và đối chiếu nội bộ. |
+| `product_number` | NVARCHAR(50) | Mã cấu trúc dạng chữ và số đại diện cho sản phẩm, thường dùng để phân loại hoặc quản lý hàng tồn kho. |
+| `product_name` | NVARCHAR(50) | Tên mô tả của sản phẩm, bao gồm các chi tiết chính như loại, màu sắc và kích cỡ. |
+| `category_id` | NVARCHAR(50) | Mã định danh duy nhất cho danh mục của sản phẩm, liên kết đến phân loại cấp cao hơn. |
+| `category` | NVARCHAR(50) | Phân loại rộng hơn của sản phẩm (ví dụ: Bikes, Components) để nhóm các mặt hàng liên quan. |
+| `subcategory` | NVARCHAR(50) | Phân loại chi tiết hơn của sản phẩm nằm trong danh mục, chẳng hạn như loại hình sản phẩm. |
+| `maintenance_required` | NVARCHAR(50) | Cho biết sản phẩm có yêu cầu bảo trì hay không (ví dụ: 'Yes', 'No'). |
+| `cost` | INT | Chi phí hoặc giá gốc của sản phẩm, tính bằng đơn vị tiền tệ. |
+| `product_line` | NVARCHAR(50) | Dòng sản phẩm hoặc chuỗi (series) cụ thể mà sản phẩm thuộc về (ví dụ: Road, Mountain). |
+| `start_date` | DATE | Ngày sản phẩm bắt đầu được mở bán hoặc đưa vào sử dụng. |
+
+---
+
+### 3. gold.fact_sales
+* **Mục đích:** Lưu trữ dữ liệu giao dịch bán hàng phục vụ cho mục đích phân tích.
+* **Chi tiết các cột:**
+
+| Tên Cột | Kiểu Dữ Liệu | Mô tả |
+| :--- | :--- | :--- |
+| `order_number` | NVARCHAR(50) | Mã định danh dạng chữ và số duy nhất cho mỗi đơn đặt hàng (ví dụ: 'SO54496'). |
+| `product_key` | INT | Khóa thay thế (Surrogate key) liên kết đơn hàng với bảng danh mục sản phẩm (dim_products). |
+| `customer_key` | INT | Khóa thay thế (Surrogate key) liên kết đơn hàng với bảng danh mục khách hàng (dim_customers). |
+| `order_date` | DATE | Ngày đặt hàng. |
+| `shipping_date` | DATE | Ngày đơn hàng được giao cho khách. |
+| `due_date` | DATE | Ngày đến hạn thanh toán của đơn hàng. |
+| `sales_amount` | INT | Tổng giá trị tiền tệ của mặt hàng bán ra, tính bằng số nguyên (ví dụ: 25). |
+| `quantity` | INT | Số lượng sản phẩm được đặt cho mặt hàng đó (ví dụ: 1). |
+| `price` | INT | Giá bán trên mỗi đơn vị sản phẩm cho mặt hàng đó, tính bằng số nguyên (ví dụ: 25). |
