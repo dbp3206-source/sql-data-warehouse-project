@@ -1,16 +1,16 @@
 /*
 ===============================================================================
-Quality Checks
+Kiểm tra Chất lượng Dữ liệu (Quality Checks)
 ===============================================================================
-Script Purpose:
-    This script performs quality checks to validate the integrity, consistency, 
-    and accuracy of the Gold Layer. These checks ensure:
-    - Uniqueness of surrogate keys in dimension tables.
-    - Referential integrity between fact and dimension tables.
-    - Validation of relationships in the data model for analytical purposes.
+Mục đích Script:
+    Script này thực hiện các bước kiểm tra chất lượng nhằm xác định tính toàn vẹn, 
+    nhất quán và độ chính xác của lớp dữ liệu Gold Layer. Các bước này đảm bảo:
+    - Tính duy nhất của các khóa thay thế (surrogate keys) trong các bảng chiều (dimension tables).
+    - Tính toàn vẹn tham chiếu giữa bảng sự kiện (fact tables) và bảng chiều.
+    - Xác thực các mối quan hệ trong mô hình dữ liệu phục vụ cho mục đích phân tích.
 
-Usage Notes:
-    - Investigate and resolve any discrepancies found during the checks.
+Lưu ý khi sử dụng:
+    - Cần điều tra và xử lý triệt để bất kỳ sai sót nào phát hiện được trong quá trình kiểm tra.
 ===============================================================================
 */
 
